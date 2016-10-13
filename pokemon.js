@@ -37,15 +37,12 @@ class PokemonList extends Array {
       }
   }
   max(){
-    let max = 0;
+    let max = Math.max(...this);
 
-    for (let pokemon of this){
-      if (pokemon > max){
-        max = pokemon;
+    if (!isNaN(max) && max >= 0) {
+      for (let pokemon of this){
+         if (pokemon == max) return pokemon;
       }
-    }
-    if (max != 0) {
-      return max;
     }
     else {
       return 'Список пуст';
