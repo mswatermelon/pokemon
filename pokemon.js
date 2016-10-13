@@ -14,8 +14,8 @@ class Pokemon {
 }
 
 class PokemonList extends Array {
-  constructor() {
-    super(...arguments);
+  constructor(...pokemons) {
+    super(...pokemons);
   }
   add(name, level) {
     let childPokemon = new Pokemon(name, level);
