@@ -15,7 +15,13 @@ class Pokemon {
 
 class PokemonList extends Array {
   constructor(...pokemons) {
-    super(...pokemons);
+    let truePokemons = [];
+    
+    for(let pokemon of pokemons){
+      if(pokemon instanceof Pokemon) truePokemons.push(pokemon);
+    }
+
+    super(...truePokemons);
   }
   add(name, level) {
     let childPokemon = new Pokemon(name, level);
@@ -32,11 +38,11 @@ class PokemonList extends Array {
 
     if (!isNaN(max) && max >= 0) {
       for (let pokemon of this){
-         if (pokemon == max) pokemon.show();
+         if (pokemon == max) return pokemon;
       }
     }
     else {
-      console.log('Список пуст');
+      return;
     }
   }
 }
@@ -59,6 +65,8 @@ found.push(new Pokemon('Слоупок', 7));
 
 lost.show();
 found.show();
+
+lost.max().show();
 
 found.push(lost.splice(2,1)[0]);
 
