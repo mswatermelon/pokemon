@@ -15,11 +15,9 @@ class Pokemon {
 
 class PokemonList extends Array {
   constructor(...pokemons) {
-    let truePokemons = [];
-    
-    for(let pokemon of pokemons){
-      if(pokemon instanceof Pokemon) truePokemons.push(pokemon);
-    }
+    let truePokemons = pokemons.filter((pokemon) => {
+      return pokemon instanceof Pokemon;
+    });
 
     super(...truePokemons);
   }
@@ -29,21 +27,17 @@ class PokemonList extends Array {
   }
   show(){
       console.log(`Покемонов в списке ${this.length}.`);
-      for (let pokemon of this){
-        pokemon.show();
-      }
+      this.forEach((element) => {
+        element.show();
+      });
   }
   max(){
     let max = Math.max(...this);
 
-    if (!isNaN(max) && max >= 0) {
-      for (let pokemon of this){
-         if (pokemon == max) return pokemon;
-      }
-    }
-    else {
-      return;
-    }
+    return this.find((element) => {
+      if (element == max) return true;
+      else return false;
+    });
   }
 }
 
@@ -52,7 +46,7 @@ let pikachu = new Pokemon('Пикачу', 2),
     bulbazavr = new Pokemon('Бульбазавр', 5),
     charmander = new Pokemon('Чармандер', 2),
     mytu = new Pokemon('Мьюту', 4),
-    lost = new PokemonList(pikachu, skvirtl, bulbazavr),
+    lost = new PokemonList(pikachu, skvirtl, 3, bulbazavr),
     found = new PokemonList(charmander, mytu);
 
 lost.push(new Pokemon('Мяут', 1));
